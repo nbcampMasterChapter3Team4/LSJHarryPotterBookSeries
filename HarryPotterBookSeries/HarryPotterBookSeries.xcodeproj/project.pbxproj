@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		861B1C082D92A2B800EEECFA /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 861B1C072D92A2B800EEECFA /* RxSwift */; };
+		861B1C0A2D92A2C300EEECFA /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 861B1C092D92A2C300EEECFA /* RxCocoa */; };
+		861B1C0D2D92ACF700EEECFA /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 861B1C0C2D92ACF700EEECFA /* Then */; };
 		8626A0C32D928EC500C3D478 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0BC2D928EC500C3D478 /* Assets.xcassets */; };
 		8626A0C52D928EC500C3D478 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */; };
 		8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0BB2D928EC500C3D478 /* AppDelegate.swift */; };
@@ -14,6 +17,8 @@
 		8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0C12D928EC500C3D478 /* ViewController.swift */; };
 		8626A0CB2D92902800C3D478 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8626A0CA2D92902800C3D478 /* SnapKit */; };
 		8626A0CD2D9290D300C3D478 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0CC2D9290D300C3D478 /* data.json */; };
+		8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */; };
+		8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0D02D92946B00C3D478 /* BookInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,8 @@
 		8626A0C02D928EC500C3D478 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8626A0C12D928EC500C3D478 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8626A0CC2D9290D300C3D478 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceViewModel.swift; sourceTree = "<group>"; };
+		8626A0D02D92946B00C3D478 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarryPotterBookSeries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,31 +39,100 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				861B1C0A2D92A2C300EEECFA /* RxCocoa in Frameworks */,
+				861B1C082D92A2B800EEECFA /* RxSwift in Frameworks */,
 				8626A0CB2D92902800C3D478 /* SnapKit in Frameworks */,
+				861B1C0D2D92ACF700EEECFA /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		861B1C062D92A2B800EEECFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8626A0C22D928EC500C3D478 /* HarryPotterBookSeries */ = {
 			isa = PBXGroup;
 			children = (
-				8626A0BB2D928EC500C3D478 /* AppDelegate.swift */,
-				8626A0BC2D928EC500C3D478 /* Assets.xcassets */,
 				8626A0BD2D928EC500C3D478 /* Info.plist */,
-				8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */,
-				8626A0C02D928EC500C3D478 /* SceneDelegate.swift */,
-				8626A0C12D928EC500C3D478 /* ViewController.swift */,
-				8626A0CC2D9290D300C3D478 /* data.json */,
+				8626A0D82D92958800C3D478 /* App */,
+				8626A0D72D92956300C3D478 /* Resources */,
+				8626A0D62D92953900C3D478 /* Utility */,
+				8626A0D52D92952900C3D478 /* Storyboard */,
+				8626A0D22D92947100C3D478 /* Model */,
+				8626A0D42D92951B00C3D478 /* ViewModel */,
+				8626A0D32D92951500C3D478 /* View */,
 			);
 			path = HarryPotterBookSeries;
+			sourceTree = "<group>";
+		};
+		8626A0D22D92947100C3D478 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0D02D92946B00C3D478 /* BookInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8626A0D32D92951500C3D478 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0C12D928EC500C3D478 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8626A0D42D92951B00C3D478 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8626A0D52D92952900C3D478 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		8626A0D62D92953900C3D478 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		8626A0D72D92956300C3D478 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0BC2D928EC500C3D478 /* Assets.xcassets */,
+				8626A0CC2D9290D300C3D478 /* data.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8626A0D82D92958800C3D478 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0BB2D928EC500C3D478 /* AppDelegate.swift */,
+				8626A0C02D928EC500C3D478 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		86B3A8702D90F60900BE188A = {
 			isa = PBXGroup;
 			children = (
 				8626A0C22D928EC500C3D478 /* HarryPotterBookSeries */,
+				861B1C062D92A2B800EEECFA /* Frameworks */,
 				86B3A87A2D90F60900BE188A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +163,9 @@
 			name = HarryPotterBookSeries;
 			packageProductDependencies = (
 				8626A0CA2D92902800C3D478 /* SnapKit */,
+				861B1C072D92A2B800EEECFA /* RxSwift */,
+				861B1C092D92A2C300EEECFA /* RxCocoa */,
+				861B1C0C2D92ACF700EEECFA /* Then */,
 			);
 			productName = HarryPotterBookSeries;
 			productReference = 86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */;
@@ -118,6 +197,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				861B1BA62D92A0DD00EEECFA /* XCRemoteSwiftPackageReference "RxSwift" */,
+				861B1C0B2D92ACF700EEECFA /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 86B3A87A2D90F60900BE188A /* Products */;
@@ -147,9 +228,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */,
 				8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */,
 				8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */,
 				8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */,
+				8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +258,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y333NVBXPT;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -207,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y333NVBXPT;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -374,6 +459,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		861B1BA62D92A0DD00EEECFA /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
+		861B1C0B2D92ACF700EEECFA /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -385,6 +486,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		861B1C072D92A2B800EEECFA /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 861B1BA62D92A0DD00EEECFA /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		861B1C092D92A2C300EEECFA /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 861B1BA62D92A0DD00EEECFA /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		861B1C0C2D92ACF700EEECFA /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 861B1C0B2D92ACF700EEECFA /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
 		8626A0CA2D92902800C3D478 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */;
