@@ -6,46 +6,57 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8626A0C32D928EC500C3D478 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0BC2D928EC500C3D478 /* Assets.xcassets */; };
+		8626A0C52D928EC500C3D478 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */; };
+		8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0BB2D928EC500C3D478 /* AppDelegate.swift */; };
+		8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0C02D928EC500C3D478 /* SceneDelegate.swift */; };
+		8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0C12D928EC500C3D478 /* ViewController.swift */; };
+		8626A0CB2D92902800C3D478 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8626A0CA2D92902800C3D478 /* SnapKit */; };
+		8626A0CD2D9290D300C3D478 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0CC2D9290D300C3D478 /* data.json */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		8626A0BB2D928EC500C3D478 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8626A0BC2D928EC500C3D478 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8626A0BD2D928EC500C3D478 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8626A0BE2D928EC500C3D478 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8626A0C02D928EC500C3D478 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8626A0C12D928EC500C3D478 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8626A0CC2D9290D300C3D478 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarryPotterBookSeries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		86B3A88B2D90F60A00BE188A /* Exceptions for "HarryPotterBookSeries" folder in "HarryPotterBookSeries" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 86B3A8782D90F60900BE188A /* HarryPotterBookSeries */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		86B3A87B2D90F60900BE188A /* HarryPotterBookSeries */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				86B3A88B2D90F60A00BE188A /* Exceptions for "HarryPotterBookSeries" folder in "HarryPotterBookSeries" target */,
-			);
-			path = HarryPotterBookSeries;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		86B3A8762D90F60900BE188A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8626A0CB2D92902800C3D478 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8626A0C22D928EC500C3D478 /* HarryPotterBookSeries */ = {
+			isa = PBXGroup;
+			children = (
+				8626A0BB2D928EC500C3D478 /* AppDelegate.swift */,
+				8626A0BC2D928EC500C3D478 /* Assets.xcassets */,
+				8626A0BD2D928EC500C3D478 /* Info.plist */,
+				8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */,
+				8626A0C02D928EC500C3D478 /* SceneDelegate.swift */,
+				8626A0C12D928EC500C3D478 /* ViewController.swift */,
+				8626A0CC2D9290D300C3D478 /* data.json */,
+			);
+			path = HarryPotterBookSeries;
+			sourceTree = "<group>";
+		};
 		86B3A8702D90F60900BE188A = {
 			isa = PBXGroup;
 			children = (
-				86B3A87B2D90F60900BE188A /* HarryPotterBookSeries */,
+				8626A0C22D928EC500C3D478 /* HarryPotterBookSeries */,
 				86B3A87A2D90F60900BE188A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,11 +84,9 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				86B3A87B2D90F60900BE188A /* HarryPotterBookSeries */,
-			);
 			name = HarryPotterBookSeries;
 			packageProductDependencies = (
+				8626A0CA2D92902800C3D478 /* SnapKit */,
 			);
 			productName = HarryPotterBookSeries;
 			productReference = 86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */;
@@ -107,6 +116,9 @@
 			);
 			mainGroup = 86B3A8702D90F60900BE188A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 86B3A87A2D90F60900BE188A /* Products */;
 			projectDirPath = "";
@@ -122,6 +134,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8626A0C32D928EC500C3D478 /* Assets.xcassets in Resources */,
+				8626A0CD2D9290D300C3D478 /* data.json in Resources */,
+				8626A0C52D928EC500C3D478 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +147,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */,
+				8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */,
+				8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8626A0BF2D928EC500C3D478 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8626A0BE2D928EC500C3D478 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		86B3A88D2D90F60A00BE188A /* Debug */ = {
@@ -150,7 +179,6 @@
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -183,7 +211,6 @@
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -345,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8626A0CA2D92902800C3D478 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8626A0C92D92902800C3D478 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 86B3A8712D90F60900BE188A /* Project object */;
 }
