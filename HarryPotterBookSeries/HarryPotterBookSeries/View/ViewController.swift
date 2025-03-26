@@ -25,8 +25,9 @@ class ViewController: UIViewController {
         bookTitleAndSeries.backgroundColor = UIColor.systemPink
         bookInfoArea.backgroundColor = UIColor.systemGreen
         setupUI()
-        viewModel.loadBooks() // ✅ 데이터 로드
         setupBindings()
+        viewModel.loadBooks() // ✅ 데이터 로드
+        
     }
 
     private func setupUI() {
@@ -58,8 +59,28 @@ class ViewController: UIViewController {
                     self.bookInfoArea.configure(index: index, book: book)
                 }
             }
-
         })
             .disposed(by: disposeBag)
+        
+        
+        viewModel.error
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] error in
+                print("⚠️ Alert 호출됨: \(error.message)") // 디버깅용 로그 추가
+                self?.showErrorAlert(message: error.message)
+            })
+            .disposed(by: disposeBag)
+
+    }
+    
+    private func showErrorAlert(message: String) {
+        print("⚠️ showErrorAlert 실행됨: \(message)") // 디버깅용 로그 추가
+
+        let alert = UIAlertController(title: "에러 발생", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(action)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
