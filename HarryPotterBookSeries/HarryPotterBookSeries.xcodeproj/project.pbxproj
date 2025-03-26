@@ -19,6 +19,9 @@
 		8626A0CD2D9290D300C3D478 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0CC2D9290D300C3D478 /* data.json */; };
 		8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */; };
 		8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0D02D92946B00C3D478 /* BookInfo.swift */; };
+		86F6BC2B2D93925C00F2AEA7 /* BookInfoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */; };
+		86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */; };
+		86F6BC322D9396AB00F2AEA7 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC312D9396AB00F2AEA7 /* Image+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceViewModel.swift; sourceTree = "<group>"; };
 		8626A0D02D92946B00C3D478 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarryPotterBookSeries.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoArea.swift; sourceTree = "<group>"; };
+		86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTitleAndSeries.swift; sourceTree = "<group>"; };
+		86F6BC312D9396AB00F2AEA7 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,10 +69,10 @@
 				8626A0D82D92958800C3D478 /* App */,
 				8626A0D72D92956300C3D478 /* Resources */,
 				8626A0D62D92953900C3D478 /* Utility */,
-				8626A0D52D92952900C3D478 /* Storyboard */,
 				8626A0D22D92947100C3D478 /* Model */,
-				8626A0D42D92951B00C3D478 /* ViewModel */,
 				8626A0D32D92951500C3D478 /* View */,
+				8626A0D42D92951B00C3D478 /* ViewModel */,
+				8626A0D52D92952900C3D478 /* Storyboard */,
 			);
 			path = HarryPotterBookSeries;
 			sourceTree = "<group>";
@@ -82,6 +88,7 @@
 		8626A0D32D92951500C3D478 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86F6BC292D93924900F2AEA7 /* ViewComponents */,
 				8626A0C12D928EC500C3D478 /* ViewController.swift */,
 			);
 			path = View;
@@ -106,6 +113,7 @@
 		8626A0D62D92953900C3D478 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				86F6BC302D93969C00F2AEA7 /* Extensions */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -143,6 +151,23 @@
 				86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		86F6BC292D93924900F2AEA7 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */,
+				86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */,
+			);
+			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		86F6BC302D93969C00F2AEA7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86F6BC312D9396AB00F2AEA7 /* Image+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +255,10 @@
 			files = (
 				8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */,
 				8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */,
+				86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeries.swift in Sources */,
+				86F6BC322D9396AB00F2AEA7 /* Image+Extension.swift in Sources */,
 				8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */,
+				86F6BC2B2D93925C00F2AEA7 /* BookInfoArea.swift in Sources */,
 				8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */,
 				8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */,
 			);

@@ -16,51 +16,30 @@ class ViewController: UIViewController {
     private let viewModel = DataServiceViewModel() // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
-    private let titleLabel = UILabel().then {
-        $0.textColor = .label
-        $0.font = .systemFont(ofSize: 24, weight: .bold)
-        $0.numberOfLines = 2
-        $0.textAlignment = .center
-    }
-
-    private let seriesNumberLabel = UILabel().then {
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 16)
-        $0.layer.cornerRadius = 25
-        $0.backgroundColor = .systemBlue
-        $0.clipsToBounds = true
-        $0.textAlignment = .center // 텍스트 가운데 정렬
-    }
-
-
+    private let bookTitleAndSeries = BookTitleAndSeries()
+    private let bookInfoArea = BookInfoArea()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        addSubView()
         setupUI()
-        setupBindings()
         viewModel.loadBooks() // ✅ 데이터 로드
-    }
-
-    private func addSubView() {
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(seriesNumberLabel)
+        setupBindings()
     }
 
     private func setupUI() {
-        titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+        self.view.addSubview(bookTitleAndSeries)
+        self.view.addSubview(bookInfoArea)
+        
+        bookTitleAndSeries.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.equalToSuperview()
         }
         
-        seriesNumberLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            
-            make.leading.greaterThanOrEqualToSuperview().inset(20)  // 왼쪽 여백 최소 20
-            make.trailing.lessThanOrEqualToSuperview().inset(20)
-            
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.width.height.equalTo(50)
+        bookInfoArea.snp.makeConstraints { make in
+            make.top.equalTo(bookTitleAndSeries.snp.bottom).inset(16)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).inset(5)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(5)
         }
     }
 
@@ -69,9 +48,15 @@ class ViewController: UIViewController {
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트는 반드시 메인 스레드에서
         .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
-            print(books.first?.title ?? "책 데이터 없음")
-            self.titleLabel.text = books.first?.title
-            self.seriesNumberLabel.text = "\(1)"
+            
+            for (index, book) in books.enumerated() {
+                if index == 0 {
+                    self.bookTitleAndSeries.configure(index: index, book: book)
+                    self.bookInfoArea.configure(index: index, book: book)
+                    print(book)
+                }
+            }
+            
         })
             .disposed(by: disposeBag)
     }

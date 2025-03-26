@@ -7,8 +7,6 @@
 
 import Foundation
 
-// let bookInfo = try? JSONDecoder().decode(BookInfo.self, from: jsonData)
-
 struct BookInfo: Codable {
     let data: [Datum]
 }
@@ -23,6 +21,17 @@ struct Attributes: Codable {
     let wiki: String
     let chapters: [Chapter]
 
+    init() {
+        self.title = ""
+        self.author = ""
+        self.pages =  -1
+        self.releaseDate = ""
+        self.dedication = ""
+        self.summary = ""
+        self.wiki = ""
+        self.chapters = []
+    }
+    
     enum CodingKeys: String, CodingKey {
         case title, author, pages
         case releaseDate = "release_date"
