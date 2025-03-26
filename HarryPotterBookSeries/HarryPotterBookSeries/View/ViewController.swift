@@ -18,10 +18,12 @@ class ViewController: UIViewController {
 
     private let bookTitleAndSeries = BookTitleAndSeries()
     private let bookInfoArea = BookInfoArea()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        bookTitleAndSeries.backgroundColor = UIColor.systemPink
+        bookInfoArea.backgroundColor = UIColor.systemGreen
         setupUI()
         viewModel.loadBooks() // ✅ 데이터 로드
         setupBindings()
@@ -30,16 +32,17 @@ class ViewController: UIViewController {
     private func setupUI() {
         self.view.addSubview(bookTitleAndSeries)
         self.view.addSubview(bookInfoArea)
-        
+
         bookTitleAndSeries.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(bookInfoArea.snp.top).offset(-16)
             make.leading.trailing.equalToSuperview()
         }
-        
+
         bookInfoArea.snp.makeConstraints { make in
-            make.top.equalTo(bookTitleAndSeries.snp.bottom).inset(16)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).inset(5)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(5)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(5)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-5)
         }
     }
 
@@ -48,15 +51,14 @@ class ViewController: UIViewController {
             .observe(on: MainScheduler.instance) // ✅ UI 업데이트는 반드시 메인 스레드에서
         .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
-            
+
             for (index, book) in books.enumerated() {
                 if index == 0 {
                     self.bookTitleAndSeries.configure(index: index, book: book)
                     self.bookInfoArea.configure(index: index, book: book)
-                    print(book)
                 }
             }
-            
+
         })
             .disposed(by: disposeBag)
     }

@@ -35,25 +35,8 @@ final class BookInfoArea: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private var rootStackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 16
-        $0.alignment = .fill
-        $0.distribution = .fill
-    }
-
-    private var textInfoStackView = UIStackView().then {
-        $0.axis = .vertical
-        $0.spacing = 8
-        $0.alignment = .fill
-        $0.distribution = .fill
-    }
-
     private let bookImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 100, height: 100 * 2 / 3))
-        }
     }
 
     private let titleLabel = UILabel().then {
@@ -63,52 +46,58 @@ final class BookInfoArea: UIView {
         $0.textAlignment = .center
     }
 
-    private var authorTitleLabel: UILabel {
-        makeAttributeTitleLabel(for: .author)
+    private lazy var authorTitleLabel = makeAttributeTitleLabel(for: .author)
+    
+    private lazy var releasedTitleLabel = makeAttributeTitleLabel(for: .released)
+    
+    private lazy var pagesTitleLabel = makeAttributeTitleLabel(for: .pages)
+    
+    private lazy var authorValueLabel = makeAttributeValueLabel(for: .author)
+    
+    private lazy var releasedValueLabel = makeAttributeValueLabel(for: .released)
+    
+    private lazy var pagesValueLabel = makeAttributeValueLabel(for: .pages)
+
+    private var rootStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 16
+        $0.alignment = .top
+        $0.distribution = .fill
     }
 
-    private var releasedTitleLabel: UILabel {
-        makeAttributeTitleLabel(for: .released)
-    }
-
-    private var pagesTitleLabel: UILabel {
-        makeAttributeTitleLabel(for: .released)
-    }
-
-    private var authorValueLabel: UILabel {
-        makeAttributeValueLabel(for: .author)
-    }
-
-    private var releasedValueLabel: UILabel {
-        makeAttributeValueLabel(for: .released)
-    }
-    private var pagesValueLabel: UILabel {
-        makeAttributeValueLabel(for: .pages)
+    private var textInfoStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 8
+        $0.alignment = .leading
+        $0.distribution = .fill
     }
 
 }
 
 extension BookInfoArea {
-    private func setupView() {
-        rootStackView = UIStackView(arrangedSubviews: [bookImageView, textInfoStackView])
-        textInfoStackView = UIStackView(arrangedSubviews: [
-            titleLabel,
-            makeAttributeStack(titleLabel: authorTitleLabel, valueLabel: authorValueLabel),
-            makeAttributeStack(titleLabel: releasedTitleLabel, valueLabel: releasedValueLabel),
-            makeAttributeStack(titleLabel: pagesTitleLabel, valueLabel: pagesValueLabel),
-            ])
-        
-        
-        addSubview(rootStackView)
-        addSubview(textInfoStackView)
 
-        // TODO: 수정필요한 부분인듯
-        rootStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+    private func setupView() {
+        let authorStack = makeAttributeStack(titleLabel: authorTitleLabel, valueLabel: authorValueLabel)
+        let releasedStack = makeAttributeStack(titleLabel: releasedTitleLabel, valueLabel: releasedValueLabel)
+        let pagesStack = makeAttributeStack(titleLabel: pagesTitleLabel, valueLabel: pagesValueLabel)
+
+        textInfoStackView.addArrangedSubview(titleLabel)
+        textInfoStackView.addArrangedSubview(authorStack)
+        textInfoStackView.addArrangedSubview(releasedStack)
+        textInfoStackView.addArrangedSubview(pagesStack)
+
+        rootStackView.addArrangedSubview(bookImageView)
+        rootStackView.addArrangedSubview(textInfoStackView)
+
+        addSubview(rootStackView)
+
+        bookImageView.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(bookImageView.snp.width).multipliedBy(1.5)
         }
 
-        textInfoStackView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
+        rootStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

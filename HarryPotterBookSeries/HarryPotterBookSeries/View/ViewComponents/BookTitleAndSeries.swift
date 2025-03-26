@@ -21,6 +21,15 @@ final class BookTitleAndSeries: UIView {
         seriesNumberLabel.setTitle("\(index + 1)", for: .normal)
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let titleLabel = UILabel().then {
         $0.textColor = .label
         $0.font = .systemFont(ofSize: 24, weight: .bold)
@@ -37,14 +46,7 @@ final class BookTitleAndSeries: UIView {
         $0.titleLabel?.textAlignment = .center
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
     private func setupView() {
         
@@ -52,15 +54,17 @@ final class BookTitleAndSeries: UIView {
         addSubview(seriesNumberLabel)
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
             make.top.equalToSuperview().offset(10)
         }
         
         seriesNumberLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().inset(20)
-            make.trailing.lessThanOrEqualToSuperview().inset(20)
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview().offset(20)
+            make.trailing.lessThanOrEqualToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-16)
             make.width.height.equalTo(50)
         }
     }
