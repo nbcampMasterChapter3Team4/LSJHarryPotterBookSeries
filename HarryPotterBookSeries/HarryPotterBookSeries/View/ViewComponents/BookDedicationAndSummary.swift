@@ -10,34 +10,49 @@ import SnapKit
 import Then
 
 class BookDedicationAndSummary: UIView {
+    private let summaryExpandedKey = "summaryExpandedKey"
+    private var isSummaryExpanded: Bool {
+        get { UserDefaults.standard.bool(forKey: summaryExpandedKey) }
+        set { UserDefaults.standard.setValue(newValue, forKey: summaryExpandedKey) }
+    }
 
     func configure(book: Attributes) {
         dedicationContentsLabel.text = book.dedication
-        summarynContentsLabel.text = book.summary
+        summaryFullText = book.summary
+        updateSummaryDisplay()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private lazy var dedicationTitleLabel = makeTitleLabel(for: .dedication)
     private lazy var summaryTitleLabel = makeTitleLabel(for: .summary)
 
     private lazy var dedicationContentsLabel = makeContentsLabel()
-    private lazy var summarynContentsLabel = makeContentsLabel()
+    private lazy var summaryContentsLabel = makeContentsLabel()
+    private lazy var moreButton = UIButton(type: .system).then {
+        $0.setTitle("더보기", for: .normal)
+        $0.addTarget(self, action: #selector(toggleSummary), for: .touchUpInside)
+    }
+    
+    private var summaryFullText: String = ""
+    private let summaryLimit = 450
 }
 
 extension BookDedicationAndSummary {
     private func setupView() {
         let dedicationStack = makeStack(titleLabel: dedicationTitleLabel, contentsLabel: dedicationContentsLabel)
-        let summaryStack = makeStack(titleLabel: summaryTitleLabel, contentsLabel: summarynContentsLabel)
+        let summaryStack = makeStack(titleLabel: summaryTitleLabel, contentsLabel: summaryContentsLabel)
 
         addSubview(dedicationStack)
         addSubview(summaryStack)
+        addSubview(moreButton)
 
         dedicationStack.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -47,11 +62,15 @@ extension BookDedicationAndSummary {
         summaryStack.snp.makeConstraints { make in
             make.top.equalTo(dedicationStack.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview()
+        }
+
+        moreButton.snp.makeConstraints { make in
+            make.top.equalTo(summaryContentsLabel.snp.bottom).offset(8)
+            make.trailing.equalTo(summaryContentsLabel.snp.trailing)
             make.bottom.equalToSuperview()
         }
     }
 }
-
 
 extension BookDedicationAndSummary {
     private enum AttributeType: String {
@@ -79,14 +98,33 @@ extension BookDedicationAndSummary {
     }
 
     private func makeStack(titleLabel: UILabel, contentsLabel: UILabel) -> UIStackView {
-        return UIStackView().then {
-            $0.addArrangedSubview(titleLabel)
-            $0.addArrangedSubview(contentsLabel)
-
+        let stack = UIStackView().then {
             $0.axis = .vertical
             $0.spacing = 8
             $0.alignment = .fill
             $0.distribution = .fill
         }
+        stack.addArrangedSubview(titleLabel)
+        stack.addArrangedSubview(contentsLabel)
+        return stack
     }
 }
+
+extension BookDedicationAndSummary {
+    private func updateSummaryDisplay() {
+        if summaryFullText.count > summaryLimit {
+            summaryContentsLabel.text = isSummaryExpanded ? summaryFullText : String(summaryFullText.prefix(summaryLimit)) + "..."
+            moreButton.isHidden = false
+            moreButton.setTitle(isSummaryExpanded ? "접기" : "더보기", for: .normal)
+        } else {
+            summaryContentsLabel.text = summaryFullText
+            moreButton.isHidden = true
+        }
+    }
+    
+    @objc private func toggleSummary() {
+        isSummaryExpanded.toggle()
+        updateSummaryDisplay()
+    }
+}
+
