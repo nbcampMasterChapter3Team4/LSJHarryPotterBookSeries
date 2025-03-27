@@ -18,21 +18,20 @@ class ViewController: UIViewController {
 
     private let bookTitleAndSeries = BookTitleAndSeries()
     private let bookInfoArea = BookInfoArea()
+    private let bookDedicationAndSummary = BookDedicationAndSummary()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        bookTitleAndSeries.backgroundColor = UIColor.systemPink
-        bookInfoArea.backgroundColor = UIColor.systemGreen
         setupUI()
         setupBindings()
         viewModel.loadBooks() // ✅ 데이터 로드
-        
     }
 
     private func setupUI() {
         self.view.addSubview(bookTitleAndSeries)
         self.view.addSubview(bookInfoArea)
+        self.view.addSubview(bookDedicationAndSummary)
 
         bookTitleAndSeries.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -41,15 +40,20 @@ class ViewController: UIViewController {
         }
 
         bookInfoArea.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(bookDedicationAndSummary.snp.top).offset(-24)
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(5)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-5)
+        }
+        
+        bookDedicationAndSummary.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
     }
 
     private func setupBindings() {
         viewModel.books
-            .observe(on: MainScheduler.instance) // ✅ UI 업데이트는 반드시 메인 스레드에서
+            .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
 
@@ -57,6 +61,7 @@ class ViewController: UIViewController {
                 if index == 0 {
                     self.bookTitleAndSeries.configure(index: index, book: book)
                     self.bookInfoArea.configure(index: index, book: book)
+                    self.bookDedicationAndSummary.configure(book: book)
                 }
             }
         })

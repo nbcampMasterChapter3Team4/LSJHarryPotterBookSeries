@@ -5,11 +5,8 @@
 //  Created by yimkeul on 3/26/25.
 //
 
-import Foundation
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
 import Then
 
 final class BookInfoArea: UIView {
@@ -47,15 +44,15 @@ final class BookInfoArea: UIView {
     }
 
     private lazy var authorTitleLabel = makeAttributeTitleLabel(for: .author)
-    
+
     private lazy var releasedTitleLabel = makeAttributeTitleLabel(for: .released)
-    
+
     private lazy var pagesTitleLabel = makeAttributeTitleLabel(for: .pages)
-    
+
     private lazy var authorValueLabel = makeAttributeValueLabel(for: .author)
-    
+
     private lazy var releasedValueLabel = makeAttributeValueLabel(for: .released)
-    
+
     private lazy var pagesValueLabel = makeAttributeValueLabel(for: .pages)
 
     private var rootStackView = UIStackView().then {

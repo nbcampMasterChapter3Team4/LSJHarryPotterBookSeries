@@ -7,8 +7,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
 import Then
 
 final class BookTitleAndSeries: UIView {
