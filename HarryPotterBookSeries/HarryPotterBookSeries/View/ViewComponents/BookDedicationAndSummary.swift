@@ -11,8 +11,6 @@ import Then
 
 class BookDedicationAndSummary: UIView {
 
-    var data: Attributes?
-
     func configure(book: Attributes) {
         dedicationContentsLabel.text = book.dedication
         summarynContentsLabel.text = book.summary
@@ -43,14 +41,13 @@ extension BookDedicationAndSummary {
 
         dedicationStack.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalTo(summaryStack.snp.top).offset(-24)
+            make.leading.trailing.equalToSuperview()
         }
 
         summaryStack.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(dedicationStack.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }
@@ -58,7 +55,7 @@ extension BookDedicationAndSummary {
 
 extension BookDedicationAndSummary {
     private enum AttributeType: String {
-        case dedication = "Deeication"
+        case dedication = "Dedication"
         case summary = "Summary"
     }
 }

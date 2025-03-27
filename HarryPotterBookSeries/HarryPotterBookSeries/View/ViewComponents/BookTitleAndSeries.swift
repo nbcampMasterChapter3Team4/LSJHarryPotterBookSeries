@@ -11,9 +11,6 @@ import Then
 
 final class BookTitleAndSeries: UIView {
     
-    var dataIndex: Int?
-    var data: Attributes?
-    
     func configure(index: Int, book: Attributes) {
         titleLabel.text = book.title
         seriesNumberLabel.setTitle("\(index + 1)", for: .normal)
@@ -62,8 +59,8 @@ final class BookTitleAndSeries: UIView {
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview().offset(20)
             make.trailing.lessThanOrEqualToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-16)
             make.width.height.equalTo(50)
+            make.bottom.equalToSuperview()
         }
     }
 }

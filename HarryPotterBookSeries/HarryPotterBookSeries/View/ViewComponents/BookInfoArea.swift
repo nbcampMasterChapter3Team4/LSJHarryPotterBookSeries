@@ -11,9 +11,6 @@ import Then
 
 final class BookInfoArea: UIView {
 
-    var dataIndex: Int?
-    var data: Attributes?
-
     func configure(index: Int, book: Attributes) {
         let bookImage = BookImages.allCases[index].rawValue
         bookImageView.image = UIImage(named: bookImage)
@@ -94,7 +91,7 @@ extension BookInfoArea {
         }
 
         rootStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.top.bottom.equalToSuperview()
         }
     }
 }
