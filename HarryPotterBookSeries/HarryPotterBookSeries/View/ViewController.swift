@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     private let viewModel = DataServiceViewModel() // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
-    private let bookTitleAndSeriesView = BookTitleAndSeriesView()
+    private let bookTitleView = BookTitleView()
+    private let bookSeriesView = BookSeriesView()
     private let bookInfoView = BookInfoView()
     private let bookDedicationAndSummaryView = BookDedicationAndSummaryView()
     private let bookChaptersView = BookChaptersView()
@@ -33,27 +34,39 @@ class ViewController: UIViewController {
         setupUI()
         setupBindings()
         viewModel.loadBooks() // ✅ 데이터 로드
+        bookTitleView.backgroundColor = .gray
+        bookSeriesView.backgroundColor = .blue
+        scrollView.backgroundColor = .yellow
     }
 }
 
 extension ViewController {
 
     private func setupUI() {
-        self.view.addSubview(bookTitleAndSeriesView)
+        self.view.addSubview(bookTitleView)
+        self.view.addSubview(bookSeriesView)
         self.view.addSubview(scrollView)
+
 
         scrollView.addSubview(contentView)
         contentView.addSubview(bookInfoView)
         contentView.addSubview(bookDedicationAndSummaryView)
         contentView.addSubview(bookChaptersView)
 
-        bookTitleAndSeriesView.snp.makeConstraints { make in
+        bookTitleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+
+        bookSeriesView.snp.makeConstraints { make in
+            make.top.equalTo(bookTitleView.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
         }
 
+
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(bookTitleAndSeriesView.snp.bottom)
+            make.top.equalTo(bookSeriesView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
 
@@ -91,14 +104,16 @@ extension ViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
-
+            self.bookSeriesView.configure(books: books)
             for (index, book) in books.enumerated() {
-                if index == 0 {
-                    self.bookTitleAndSeriesView.configure(index: index, book: book)
-                    self.bookInfoView.configure(index: index, book: book)
-                    self.bookDedicationAndSummaryView.configure(book: book)
-                    self.bookChaptersView.configure(book: book.chapters.map { $0.title })
-                }
+//                if index == 0 {
+                self.bookTitleView.configure(index: index, book: book)
+//                    self.bookSeriesView.configure(index: index, book: book)
+
+                self.bookInfoView.configure(index: index, book: book)
+                self.bookDedicationAndSummaryView.configure(book: book)
+                self.bookChaptersView.configure(book: book.chapters.map { $0.title })
+//                }
             }
         })
             .disposed(by: disposeBag)
