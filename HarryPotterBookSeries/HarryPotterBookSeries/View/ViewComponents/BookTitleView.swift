@@ -42,9 +42,7 @@ extension BookTitleView {
         addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }

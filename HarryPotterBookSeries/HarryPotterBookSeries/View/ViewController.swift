@@ -66,7 +66,7 @@ extension ViewController {
 
 
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(bookSeriesView.snp.bottom)
+            make.top.equalTo(bookSeriesView.snp.bottom).offset(16)
             make.leading.trailing.bottom.equalToSuperview()
         }
 
@@ -76,7 +76,7 @@ extension ViewController {
         }
 
         bookInfoView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(5)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-5)
         }
