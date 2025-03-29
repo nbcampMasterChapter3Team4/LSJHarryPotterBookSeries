@@ -11,9 +11,8 @@ import Then
 
 final class BookTitleView: UIView {
 
-    func configure(index: Int, book: Attributes) {
+    func configure(book: Attributes) {
         titleLabel.text = book.title
-//        seriesNumberLabel.setTitle("\(index + 1)", for: .normal)
     }
 
     override init(frame: CGRect) {
@@ -31,8 +30,6 @@ final class BookTitleView: UIView {
         $0.numberOfLines = 2
         $0.textAlignment = .center
     }
-
-
 }
 
 

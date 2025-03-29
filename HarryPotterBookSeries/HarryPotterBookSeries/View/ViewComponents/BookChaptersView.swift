@@ -44,8 +44,7 @@ extension BookChaptersView {
         addSubview(chaptersStack)
 
         chaptersStack.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 

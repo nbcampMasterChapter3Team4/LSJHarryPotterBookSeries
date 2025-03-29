@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     private let bookDedicationAndSummaryView = BookDedicationAndSummaryView()
     private let bookChaptersView = BookChaptersView()
 
+    private var books: [Attributes] = []
+
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false // ✅ 스크롤 바 숨김
     }
@@ -31,12 +33,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        bookSeriesView.delegate = self
         setupUI()
         setupBindings()
         viewModel.loadBooks() // ✅ 데이터 로드
-        bookTitleView.backgroundColor = .gray
-        bookSeriesView.backgroundColor = .blue
-        scrollView.backgroundColor = .yellow
     }
 }
 
@@ -64,10 +64,11 @@ extension ViewController {
             make.leading.trailing.equalToSuperview()
         }
 
-
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(bookSeriesView.snp.bottom).offset(16)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            make.bottom.equalToSuperview()
         }
 
         contentView.snp.makeConstraints { make in
@@ -104,16 +105,11 @@ extension ViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
-            self.bookSeriesView.configure(books: books)
-            for (index, book) in books.enumerated() {
-//                if index == 0 {
-                self.bookTitleView.configure(index: index, book: book)
-//                    self.bookSeriesView.configure(index: index, book: book)
+            self.books = books
 
-                self.bookInfoView.configure(index: index, book: book)
-                self.bookDedicationAndSummaryView.configure(book: book)
-                self.bookChaptersView.configure(book: book.chapters.map { $0.title })
-//                }
+            self.bookSeriesView.configure(books: books)
+            if let firstBook = books.first {
+                self.updateViewController(with: firstBook, index: 0)
             }
         })
             .disposed(by: disposeBag)
@@ -137,5 +133,20 @@ extension ViewController {
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+    }
+
+    private func updateViewController(with book: Attributes, index: Int) {
+        self.bookTitleView.configure(book: book)
+        self.bookInfoView.configure(index: index, book: book)
+        self.bookDedicationAndSummaryView.configure(book: book)
+        self.bookChaptersView.configure(book: book.chapters.map { $0.title })
+    }
+}
+
+
+extension ViewController: BookSeriesViewDelegate {
+    func bookSeriesView(_ view: BookSeriesView, didSelectButtonAt index: Int) {
+        let selectedBookInfo = books[index]
+        updateViewController(with: selectedBookInfo, index: index)
     }
 }

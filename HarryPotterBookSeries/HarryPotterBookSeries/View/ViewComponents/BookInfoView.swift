@@ -37,7 +37,7 @@ final class BookInfoView: UIView {
         $0.textColor = .label
         $0.font = .systemFont(ofSize: 20, weight: .bold)
         $0.numberOfLines = 2
-        $0.textAlignment = .center
+        $0.textAlignment = .left
     }
 
     private lazy var authorTitleLabel = makeAttributeTitleLabel(for: .author)
