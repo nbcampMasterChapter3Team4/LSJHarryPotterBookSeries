@@ -11,7 +11,6 @@ import RxCocoa
 
 final class DataServiceViewModel {
 
-    private let disposeBag = DisposeBag()
     private let booksSubject = BehaviorSubject<[Attributes]>(value: []) // 초기값 빈 배열
     private let errorSubject = PublishSubject<DataError>() // 에러 발생을 전달하는 Subject
 

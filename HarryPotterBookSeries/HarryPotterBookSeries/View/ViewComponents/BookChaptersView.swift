@@ -1,5 +1,5 @@
 //
-//  BookChaptersArea.swift
+//  BookChaptersView.swift
 //  HarryPotterBookSeries
 //
 //  Created by yimkeul on 3/27/25.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BookChaptersArea: UIView {
+class BookChaptersView: UIView {
 
     func configure(book: [String]) {
         updateChapters(book)
@@ -38,7 +38,7 @@ class BookChaptersArea: UIView {
     }
 }
 
-extension BookChaptersArea {
+extension BookChaptersView {
     private func setupView() {
         chaptersStack.addArrangedSubview(titleLabel)
         addSubview(chaptersStack)
@@ -56,7 +56,7 @@ extension BookChaptersArea {
     }
 }
 
-extension BookChaptersArea {
+extension BookChaptersView {
     private func makeContentsLabel(_ text: String) -> UILabel {
         return UILabel().then {
             $0.font = .systemFont(ofSize: 14)

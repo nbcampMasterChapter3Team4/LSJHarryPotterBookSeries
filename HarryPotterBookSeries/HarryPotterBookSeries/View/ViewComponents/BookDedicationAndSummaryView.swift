@@ -1,5 +1,5 @@
 //
-//  BookDedicationAndSummary.swift
+//  BookDedicationAndSummaryView.swift
 //  HarryPotterBookSeries
 //
 //  Created by yimkeul on 3/27/25.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BookDedicationAndSummary: UIView {
+class BookDedicationAndSummaryView: UIView {
     private let summaryExpandedKey = "summaryExpandedKey"
     private var isSummaryExpanded: Bool {
         get { UserDefaults.standard.bool(forKey: summaryExpandedKey) }
@@ -36,6 +36,7 @@ class BookDedicationAndSummary: UIView {
 
     private lazy var dedicationContentsLabel = makeContentsLabel()
     private lazy var summaryContentsLabel = makeContentsLabel()
+    
     private lazy var moreButton = UIButton(type: .system).then {
         $0.setTitle("더보기", for: .normal)
         $0.addTarget(self, action: #selector(toggleSummary), for: .touchUpInside)
@@ -45,7 +46,7 @@ class BookDedicationAndSummary: UIView {
     private let summaryLimit = 450
 }
 
-extension BookDedicationAndSummary {
+extension BookDedicationAndSummaryView {
     private func setupView() {
         let dedicationStack = makeStack(titleLabel: dedicationTitleLabel, contentsLabel: dedicationContentsLabel)
         let summaryStack = makeStack(titleLabel: summaryTitleLabel, contentsLabel: summaryContentsLabel)
@@ -72,14 +73,14 @@ extension BookDedicationAndSummary {
     }
 }
 
-extension BookDedicationAndSummary {
+extension BookDedicationAndSummaryView {
     private enum AttributeType: String {
         case dedication = "Dedication"
         case summary = "Summary"
     }
 }
 
-extension BookDedicationAndSummary {
+extension BookDedicationAndSummaryView {
     private func makeTitleLabel(for attributeType: AttributeType) -> UILabel {
         return UILabel().then {
             $0.font = .systemFont(ofSize: 18, weight: .bold)
@@ -110,7 +111,7 @@ extension BookDedicationAndSummary {
     }
 }
 
-extension BookDedicationAndSummary {
+extension BookDedicationAndSummaryView {
     private func updateSummaryDisplay() {
         if summaryFullText.count > summaryLimit {
             summaryContentsLabel.text = isSummaryExpanded ? summaryFullText : String(summaryFullText.prefix(summaryLimit)) + "..."

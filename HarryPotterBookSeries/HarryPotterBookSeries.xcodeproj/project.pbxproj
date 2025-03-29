@@ -19,10 +19,10 @@
 		8626A0CD2D9290D300C3D478 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8626A0CC2D9290D300C3D478 /* data.json */; };
 		8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */; };
 		8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0D02D92946B00C3D478 /* BookInfo.swift */; };
-		863817AA2D951E970071D4B3 /* BookDedicationAndSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817A92D951E970071D4B3 /* BookDedicationAndSummary.swift */; };
-		863817AC2D9529B30071D4B3 /* BookChaptersArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817AB2D9529B30071D4B3 /* BookChaptersArea.swift */; };
-		86F6BC2B2D93925C00F2AEA7 /* BookInfoArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */; };
-		86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */; };
+		863817AA2D951E970071D4B3 /* BookDedicationAndSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817A92D951E970071D4B3 /* BookDedicationAndSummaryView.swift */; };
+		863817AC2D9529B30071D4B3 /* BookChaptersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817AB2D9529B30071D4B3 /* BookChaptersView.swift */; };
+		86F6BC2B2D93925C00F2AEA7 /* BookInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2A2D93925C00F2AEA7 /* BookInfoView.swift */; };
+		86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeriesView.swift */; };
 		86F6BC322D9396AB00F2AEA7 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC312D9396AB00F2AEA7 /* Image+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,11 +36,11 @@
 		8626A0CC2D9290D300C3D478 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		8626A0CE2D92929200C3D478 /* DataServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceViewModel.swift; sourceTree = "<group>"; };
 		8626A0D02D92946B00C3D478 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
-		863817A92D951E970071D4B3 /* BookDedicationAndSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDedicationAndSummary.swift; sourceTree = "<group>"; };
-		863817AB2D9529B30071D4B3 /* BookChaptersArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookChaptersArea.swift; sourceTree = "<group>"; };
+		863817A92D951E970071D4B3 /* BookDedicationAndSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDedicationAndSummaryView.swift; sourceTree = "<group>"; };
+		863817AB2D9529B30071D4B3 /* BookChaptersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookChaptersView.swift; sourceTree = "<group>"; };
 		86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarryPotterBookSeries.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoArea.swift; sourceTree = "<group>"; };
-		86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTitleAndSeries.swift; sourceTree = "<group>"; };
+		86F6BC2A2D93925C00F2AEA7 /* BookInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfoView.swift; sourceTree = "<group>"; };
+		86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTitleAndSeriesView.swift; sourceTree = "<group>"; };
 		86F6BC312D9396AB00F2AEA7 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,10 +160,10 @@
 		86F6BC292D93924900F2AEA7 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
-				86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeries.swift */,
-				86F6BC2A2D93925C00F2AEA7 /* BookInfoArea.swift */,
-				863817A92D951E970071D4B3 /* BookDedicationAndSummary.swift */,
-				863817AB2D9529B30071D4B3 /* BookChaptersArea.swift */,
+				86F6BC2C2D93938700F2AEA7 /* BookTitleAndSeriesView.swift */,
+				86F6BC2A2D93925C00F2AEA7 /* BookInfoView.swift */,
+				863817A92D951E970071D4B3 /* BookDedicationAndSummaryView.swift */,
+				863817AB2D9529B30071D4B3 /* BookChaptersView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -259,14 +259,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				863817AA2D951E970071D4B3 /* BookDedicationAndSummary.swift in Sources */,
+				863817AA2D951E970071D4B3 /* BookDedicationAndSummaryView.swift in Sources */,
 				8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */,
 				8626A0C62D928EC500C3D478 /* AppDelegate.swift in Sources */,
-				86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeries.swift in Sources */,
+				86F6BC2D2D93938700F2AEA7 /* BookTitleAndSeriesView.swift in Sources */,
 				86F6BC322D9396AB00F2AEA7 /* Image+Extension.swift in Sources */,
 				8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */,
-				86F6BC2B2D93925C00F2AEA7 /* BookInfoArea.swift in Sources */,
-				863817AC2D9529B30071D4B3 /* BookChaptersArea.swift in Sources */,
+				86F6BC2B2D93925C00F2AEA7 /* BookInfoView.swift in Sources */,
+				863817AC2D9529B30071D4B3 /* BookChaptersView.swift in Sources */,
 				8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */,
 				8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  BookTitleAndSeries.swift
+//  BookTitleAndSeriesView.swift
 //  HarryPotterBookSeries
 //
 //  Created by yimkeul on 3/26/25.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class BookTitleAndSeries: UIView {
+final class BookTitleAndSeriesView: UIView {
     
     func configure(index: Int, book: Attributes) {
         titleLabel.text = book.title

@@ -16,14 +16,15 @@ class ViewController: UIViewController {
     private let viewModel = DataServiceViewModel() // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
-    private let bookTitleAndSeries = BookTitleAndSeries()
-    private let bookInfoArea = BookInfoArea()
-    private let bookDedicationAndSummary = BookDedicationAndSummary()
-    private let bookChaptersArea = BookChaptersArea()
+    private let bookTitleAndSeries = BookTitleAndSeriesView()
+    private let bookInfoArea = BookInfoView()
+    private let bookDedicationAndSummary = BookDedicationAndSummaryView()
+    private let bookChaptersArea = BookChaptersView()
 
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false // ✅ 스크롤 바 숨김
     }
+    
     private let contentView = UIView() // ✅ scrollView 내부 컨텐츠 뷰
 
     override func viewDidLoad() {

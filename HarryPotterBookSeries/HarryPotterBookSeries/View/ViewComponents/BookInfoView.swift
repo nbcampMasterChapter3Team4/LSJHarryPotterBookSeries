@@ -1,5 +1,5 @@
 //
-//  BookInfoArea.swift
+//  BookInfoView.swift
 //  HarryPotterBookSeries
 //
 //  Created by yimkeul on 3/26/25.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class BookInfoArea: UIView {
+final class BookInfoView: UIView {
 
     func configure(index: Int, book: Attributes) {
         let bookImage = BookImages.allCases[index].rawValue
@@ -68,7 +68,7 @@ final class BookInfoArea: UIView {
 
 }
 
-extension BookInfoArea {
+extension BookInfoView {
 
     private func setupView() {
         let authorStack = makeAttributeStack(titleLabel: authorTitleLabel, valueLabel: authorValueLabel)
@@ -96,7 +96,7 @@ extension BookInfoArea {
     }
 }
 
-extension BookInfoArea {
+extension BookInfoView {
     private enum AttributeType: String {
         case author = "Author"
         case released = "Released"
@@ -122,7 +122,7 @@ extension BookInfoArea {
     }
 }
 
-extension BookInfoArea {
+extension BookInfoView {
     private func makeAttributeTitleLabel(for attributeType: AttributeType) -> UILabel {
         return UILabel().then {
             $0.textColor = .label
