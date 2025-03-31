@@ -14,11 +14,19 @@ protocol BookSeriesViewDelegate: AnyObject {
 }
 
 final class BookSeriesView: UIView {
+    
+    private var buttons: [UIButton] = []
 
     weak var delegate: BookSeriesViewDelegate? // ✅ Delegate 객체 선언
 
     func configure(books: [Attributes]) {
         makeButtonGroup(for: books)
+        updateButtonStyles()
+    }
+    
+    func configure(for index:Int) {
+        DataServiceViewModel.shared.setCurrentDataIndex(to: index)
+        updateButtonStyles()
     }
 
     override init(frame: CGRect) {
@@ -56,7 +64,6 @@ extension BookSeriesView {
             $0.setTitle("\(indexNum + 1)", for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 16)
             $0.layer.cornerRadius = 20
-            $0.backgroundColor = .systemBlue
             $0.clipsToBounds = true
             $0.titleLabel?.textAlignment = .center
             $0.tag = indexNum
@@ -66,11 +73,29 @@ extension BookSeriesView {
             }
         }
     }
-
+    
+    
     private func makeButtonGroup(for books: [Attributes]) {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 기존 버튼 제거
+        buttons.removeAll() // 배열 초기화
+
         books.enumerated().forEach { index, _ in
             let button = makeSeriesButton(for: index)
             stackView.addArrangedSubview(button)
+            buttons.append(button) // ✅ 버튼 배열에 저장
+        }
+    }
+    
+    private func updateButtonStyles() {
+        let currentIndex = DataServiceViewModel.shared.getCurrentDataIndex()
+        buttons.enumerated().forEach { index, button in
+            if index == currentIndex {
+                button.backgroundColor = .systemBlue
+                button.setTitleColor(.white, for: .normal)
+            } else {
+                button.backgroundColor = .systemGray4
+                button.setTitleColor(.systemBlue, for: .normal)
+            }
         }
     }
 

@@ -11,6 +11,10 @@ import RxCocoa
 
 final class DataServiceViewModel {
 
+    static let shared = DataServiceViewModel()
+    
+    private init() {}
+    
     private let booksSubject = BehaviorSubject<[Attributes]>(value: []) // 초기값 빈 배열
     private let errorSubject = PublishSubject<DataError>() // 에러 발생을 전달하는 Subject
 
@@ -22,22 +26,17 @@ final class DataServiceViewModel {
     var error: Observable<DataError> { // 에러 스트림을 외부에서 구독 가능하게 제공
         return errorSubject.asObservable()
     }
-
-    enum DataError: Error {
-        case fileNotFound
-        case parsingFailed
-
-        var message: String {
-            switch self {
-            case .fileNotFound:
-                return "파일을 찾을 수 없습니다."
-            case .parsingFailed:
-                return "데이터를 불러오는 데 실패했습니다."
-            }
-        }
-
-
+    
+    private var currentDataIndex: Int = 0
+    
+    func getCurrentDataIndex() -> Int {
+        return currentDataIndex
     }
+    
+    func setCurrentDataIndex(to index: Int) {
+        self.currentDataIndex = index
+    }
+    
 
     func loadBooks() {
         guard let path = Bundle.main.path(forResource: "data", ofType: "json") else {

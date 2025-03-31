@@ -13,7 +13,7 @@ import Then
 
 class ViewController: UIViewController {
 
-    private let viewModel = DataServiceViewModel() // ✅ ViewModel 인스턴스 생성
+    private let viewModel = DataServiceViewModel.shared // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
     private let bookTitleView = BookTitleView()
@@ -137,6 +137,7 @@ extension ViewController {
 
     private func updateViewController(with book: Attributes, index: Int) {
         self.bookTitleView.configure(book: book)
+        self.bookSeriesView.configure(for: index)
         self.bookInfoView.configure(index: index, book: book)
         self.bookDedicationAndSummaryView.configure(book: book)
         self.bookChaptersView.configure(book: book.chapters.map { $0.title })
