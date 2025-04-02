@@ -13,7 +13,7 @@ import Then
 
 class ViewController: UIViewController {
 
-    private let viewModel = DataServiceViewModel.shared
+    private let viewModel = DataServiceViewModel()
     // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
@@ -106,26 +106,29 @@ extension ViewController {
             .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
             self.books = books
-            self.bookSeriesView.configure(books: books)
+                self.bookSeriesView.configure(books: books, selectedIndex: 0)
             if let firstBook = books.first {
                 self.updateViewController(with: firstBook, index: 0)
             }
         })
             .disposed(by: disposeBag)
+
+        bookSeriesView.buttonTappedHandler = { [weak self] index in
+            self?.viewModel.bookTappedRelay.accept(index)
+        }
         
-        viewModel.selectedBookIndex
+        viewModel.bookTappedRelay
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {[weak self] index in
+            .subscribe(onNext: { [weak self] index in
                 guard let self = self else { return }
                 if index < self.books.count {
                     let selectedBook = self.books[index]
                     self.updateViewController(with: selectedBook, index: index)
+                    self.bookSeriesView.updateButtonStyles(selectedIndex: index)
                 }
             })
             .disposed(by: disposeBag)
         
-
-
         viewModel.error
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in

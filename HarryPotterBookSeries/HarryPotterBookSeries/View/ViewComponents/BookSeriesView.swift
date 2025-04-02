@@ -16,14 +16,17 @@ final class BookSeriesView: UIView {
 
     private var buttons: [UIButton] = []
     private let disposeBag = DisposeBag()
+    var buttonTappedHandler: ((Int) -> Void)?
 
-    func configure(books: [Attributes]) {
+    func configure(books: [Attributes], selectedIndex: Int? = nil) {
         makeButtonGroup(for: books)
-        updateButtonStyles(viewModel: DataServiceViewModel.shared)
+        if let index = selectedIndex {
+            updateButtonStyles(selectedIndex: index)
+        }
     }
 
     func configure(for index: Int) {
-        updateButtonStyles(viewModel: DataServiceViewModel.shared)
+        updateButtonStyles(selectedIndex: index)
     }
 
     override init(frame: CGRect) {
@@ -64,12 +67,16 @@ extension BookSeriesView {
             $0.clipsToBounds = true
             $0.titleLabel?.textAlignment = .center
             $0.tag = indexNum
+            $0.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             $0.snp.makeConstraints { make in
                 make.width.height.equalTo(40)
             }
         }
     }
 
+    @objc private func buttonTapped(_ sender: UIButton) {
+        buttonTappedHandler?(sender.tag)
+    }
 
     private func makeButtonGroup(for books: [Attributes]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 기존 버튼 제거
@@ -80,34 +87,17 @@ extension BookSeriesView {
             stackView.addArrangedSubview(button)
             buttons.append(button) // ✅ 버튼 배열에 저장
         }
-        setupButtonBindings()
     }
 
-
-    private func setupButtonBindings() {
-        buttons.forEach { button in
-            button.rx.tap
-                .map { button.tag }
-                .bind(to: DataServiceViewModel.shared.selectBookIndexObserver)
-                .disposed(by: disposeBag)
-        }
-    }
-    
-
-
-    private func updateButtonStyles(viewModel: DataServiceViewModel) {
-        viewModel.selectedBookIndex
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentIndex in
-            self?.buttons.enumerated().forEach { index, button in
-                if index == currentIndex {
-                    button.backgroundColor = .systemBlue
-                    button.setTitleColor(.white, for: .normal)
-                } else {
-                    button.backgroundColor = .systemGray4
-                    button.setTitleColor(.systemBlue, for: .normal)
-                }
+    func updateButtonStyles(selectedIndex: Int) {
+        buttons.enumerated().forEach { index, button in
+            if index == selectedIndex {
+                button.backgroundColor = .systemBlue
+                button.setTitleColor(.white, for: .normal)
+            } else {
+                button.backgroundColor = .systemGray4
+                button.setTitleColor(.systemBlue, for: .normal)
             }
-        }).disposed(by: disposeBag)
+        }
     }
 }
