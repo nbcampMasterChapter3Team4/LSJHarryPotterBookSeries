@@ -13,7 +13,8 @@ import Then
 
 class ViewController: UIViewController {
 
-    private let viewModel = DataServiceViewModel.shared // ✅ ViewModel 인스턴스 생성
+    private let viewModel = DataServiceViewModel.shared
+    // ✅ ViewModel 인스턴스 생성
     private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
 
     private let bookTitleView = BookTitleView()
@@ -33,7 +34,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        bookSeriesView.delegate = self
         setupUI()
         setupBindings()
         viewModel.loadBooks() // ✅ 데이터 로드
@@ -106,13 +106,24 @@ extension ViewController {
             .subscribe(onNext: { [weak self] books in
             guard let self = self else { return }
             self.books = books
-
             self.bookSeriesView.configure(books: books)
             if let firstBook = books.first {
                 self.updateViewController(with: firstBook, index: 0)
             }
         })
             .disposed(by: disposeBag)
+        
+        viewModel.selectedBookIndex
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {[weak self] index in
+                guard let self = self else { return }
+                if index < self.books.count {
+                    let selectedBook = self.books[index]
+                    self.updateViewController(with: selectedBook, index: index)
+                }
+            })
+            .disposed(by: disposeBag)
+        
 
 
         viewModel.error
@@ -144,10 +155,3 @@ extension ViewController {
     }
 }
 
-
-extension ViewController: BookSeriesViewDelegate {
-    func bookSeriesView(_ view: BookSeriesView, didSelectButtonAt index: Int) {
-        let selectedBookInfo = books[index]
-        updateViewController(with: selectedBookInfo, index: index)
-    }
-}

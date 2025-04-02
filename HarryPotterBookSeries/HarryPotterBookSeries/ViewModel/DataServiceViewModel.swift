@@ -10,14 +10,13 @@ import RxSwift
 import RxCocoa
 
 final class DataServiceViewModel {
-
-    static let shared = DataServiceViewModel()
     
+    static let shared = DataServiceViewModel()
     private init() {}
     
     private let booksSubject = BehaviorSubject<[Attributes]>(value: []) // 초기값 빈 배열
     private let errorSubject = PublishSubject<DataError>() // 에러 발생을 전달하는 Subject
-
+    private let selectedBookIndexSubject = BehaviorSubject<Int>(value: 0)
 
     var books: Observable<[Attributes]> {
         return booksSubject.asObservable()
@@ -26,17 +25,15 @@ final class DataServiceViewModel {
     var error: Observable<DataError> { // 에러 스트림을 외부에서 구독 가능하게 제공
         return errorSubject.asObservable()
     }
-    
-    private var currentDataIndex: Int = 0
-    
-    func getCurrentDataIndex() -> Int {
-        return currentDataIndex
+
+    var selectedBookIndex: Observable<Int> { // 외부에서 구독 가능하게 제공
+        return selectedBookIndexSubject.asObservable()
     }
-    
-    func setCurrentDataIndex(to index: Int) {
-        self.currentDataIndex = index
+
+    var selectBookIndexObserver: AnyObserver<Int> { // 외부에서 값을 변경 가능하게 제공
+        return selectedBookIndexSubject.asObserver()
     }
-    
+
 
     func loadBooks() {
         guard let path = Bundle.main.path(forResource: "data", ofType: "json") else {

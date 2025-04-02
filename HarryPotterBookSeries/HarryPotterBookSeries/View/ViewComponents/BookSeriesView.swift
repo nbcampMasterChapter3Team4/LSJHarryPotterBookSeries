@@ -8,25 +8,22 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
-protocol BookSeriesViewDelegate: AnyObject {
-    func bookSeriesView(_ view: BookSeriesView, didSelectButtonAt index: Int)
-}
 
 final class BookSeriesView: UIView {
-    
-    private var buttons: [UIButton] = []
 
-    weak var delegate: BookSeriesViewDelegate? // ✅ Delegate 객체 선언
+    private var buttons: [UIButton] = []
+    private let disposeBag = DisposeBag()
 
     func configure(books: [Attributes]) {
         makeButtonGroup(for: books)
-        updateButtonStyles()
+        updateButtonStyles(viewModel: DataServiceViewModel.shared)
     }
-    
-    func configure(for index:Int) {
-        DataServiceViewModel.shared.setCurrentDataIndex(to: index)
-        updateButtonStyles()
+
+    func configure(for index: Int) {
+        updateButtonStyles(viewModel: DataServiceViewModel.shared)
     }
 
     override init(frame: CGRect) {
@@ -67,14 +64,13 @@ extension BookSeriesView {
             $0.clipsToBounds = true
             $0.titleLabel?.textAlignment = .center
             $0.tag = indexNum
-            $0.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside) // ✅ 버튼 클릭 이벤트 추가
             $0.snp.makeConstraints { make in
                 make.width.height.equalTo(40)
             }
         }
     }
-    
-    
+
+
     private func makeButtonGroup(for books: [Attributes]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 기존 버튼 제거
         buttons.removeAll() // 배열 초기화
@@ -84,23 +80,34 @@ extension BookSeriesView {
             stackView.addArrangedSubview(button)
             buttons.append(button) // ✅ 버튼 배열에 저장
         }
-    }
-    
-    private func updateButtonStyles() {
-        let currentIndex = DataServiceViewModel.shared.getCurrentDataIndex()
-        buttons.enumerated().forEach { index, button in
-            if index == currentIndex {
-                button.backgroundColor = .systemBlue
-                button.setTitleColor(.white, for: .normal)
-            } else {
-                button.backgroundColor = .systemGray4
-                button.setTitleColor(.systemBlue, for: .normal)
-            }
-        }
+        setupButtonBindings()
     }
 
-    // 버튼을 눌렀을 때 실행되는 메서드
-    @objc private func buttonTapped(_ sender: UIButton) {
-        delegate?.bookSeriesView(self, didSelectButtonAt: sender.tag) // ✅ Delegate 호출
+
+    private func setupButtonBindings() {
+        buttons.forEach { button in
+            button.rx.tap
+                .map { button.tag }
+                .bind(to: DataServiceViewModel.shared.selectBookIndexObserver)
+                .disposed(by: disposeBag)
+        }
+    }
+    
+
+
+    private func updateButtonStyles(viewModel: DataServiceViewModel) {
+        viewModel.selectedBookIndex
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] currentIndex in
+            self?.buttons.enumerated().forEach { index, button in
+                if index == currentIndex {
+                    button.backgroundColor = .systemBlue
+                    button.setTitleColor(.white, for: .normal)
+                } else {
+                    button.backgroundColor = .systemGray4
+                    button.setTitleColor(.systemBlue, for: .normal)
+                }
+            }
+        }).disposed(by: disposeBag)
     }
 }
