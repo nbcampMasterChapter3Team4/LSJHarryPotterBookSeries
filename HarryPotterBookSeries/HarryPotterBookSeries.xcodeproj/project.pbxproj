@@ -21,6 +21,8 @@
 		8626A0D12D92946B00C3D478 /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8626A0D02D92946B00C3D478 /* BookInfo.swift */; };
 		863817AA2D951E970071D4B3 /* BookDedicationAndSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817A92D951E970071D4B3 /* BookDedicationAndSummaryView.swift */; };
 		863817AC2D9529B30071D4B3 /* BookChaptersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863817AB2D9529B30071D4B3 /* BookChaptersView.swift */; };
+		865347152D9E13D6000CC23B /* AttributeType+BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865347142D9E13D6000CC23B /* AttributeType+BookInfo.swift */; };
+		865347172D9E15AE000CC23B /* AttributeType+BookDedicationAndSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865347162D9E15AE000CC23B /* AttributeType+BookDedicationAndSummary.swift */; };
 		8653A6882D980722006A197C /* BookSeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8653A6872D980722006A197C /* BookSeriesView.swift */; };
 		86D7D27A2D9A29C9001EF541 /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D7D2792D9A29C9001EF541 /* DataError.swift */; };
 		86F6BC2B2D93925C00F2AEA7 /* BookInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F6BC2A2D93925C00F2AEA7 /* BookInfoView.swift */; };
@@ -40,6 +42,8 @@
 		8626A0D02D92946B00C3D478 /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
 		863817A92D951E970071D4B3 /* BookDedicationAndSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDedicationAndSummaryView.swift; sourceTree = "<group>"; };
 		863817AB2D9529B30071D4B3 /* BookChaptersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookChaptersView.swift; sourceTree = "<group>"; };
+		865347142D9E13D6000CC23B /* AttributeType+BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributeType+BookInfo.swift"; sourceTree = "<group>"; };
+		865347162D9E15AE000CC23B /* AttributeType+BookDedicationAndSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributeType+BookDedicationAndSummary.swift"; sourceTree = "<group>"; };
 		8653A6872D980722006A197C /* BookSeriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSeriesView.swift; sourceTree = "<group>"; };
 		86B3A8792D90F60900BE188A /* HarryPotterBookSeries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarryPotterBookSeries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D7D2792D9A29C9001EF541 /* DataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
@@ -88,8 +92,8 @@
 		8626A0D22D92947100C3D478 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				865347132D9E13BA000CC23B /* Enums */,
 				8626A0D02D92946B00C3D478 /* BookInfo.swift */,
-				86D7D2792D9A29C9001EF541 /* DataError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -143,6 +147,16 @@
 				8626A0C02D928EC500C3D478 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		865347132D9E13BA000CC23B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				865347142D9E13D6000CC23B /* AttributeType+BookInfo.swift */,
+				865347162D9E15AE000CC23B /* AttributeType+BookDedicationAndSummary.swift */,
+				86D7D2792D9A29C9001EF541 /* DataError.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		86B3A8702D90F60900BE188A = {
@@ -216,7 +230,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					86B3A8782D90F60900BE188A = {
 						CreatedOnToolsVersion = 16.2;
@@ -273,10 +287,12 @@
 				86F6BC322D9396AB00F2AEA7 /* Image+Extension.swift in Sources */,
 				86D7D27A2D9A29C9001EF541 /* DataError.swift in Sources */,
 				8626A0C72D928EC500C3D478 /* SceneDelegate.swift in Sources */,
+				865347172D9E15AE000CC23B /* AttributeType+BookDedicationAndSummary.swift in Sources */,
 				86F6BC2B2D93925C00F2AEA7 /* BookInfoView.swift in Sources */,
 				863817AC2D9529B30071D4B3 /* BookChaptersView.swift in Sources */,
 				8626A0C82D928EC500C3D478 /* ViewController.swift in Sources */,
 				8626A0CF2D92929200C3D478 /* DataServiceViewModel.swift in Sources */,
+				865347152D9E13D6000CC23B /* AttributeType+BookInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +317,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y333NVBXPT;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
@@ -334,7 +349,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y333NVBXPT;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HarryPotterBookSeries/Info.plist;
@@ -395,6 +409,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y333NVBXPT;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -458,6 +473,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y333NVBXPT;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

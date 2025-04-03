@@ -32,11 +32,11 @@ final class DataServiceViewModel {
         return selectedBookIndexSubject.asObserver()
     }
     
-   let bookTappedRelay = BehaviorRelay<Int>(value: 0)
+   let bookIndexTappedRelay = BehaviorRelay<Int>(value: 0)
 
     func loadBooks() {
         guard let path = Bundle.main.path(forResource: "data", ofType: "json") else {
-            print("📛 파일을 찾을 수 없습니다.") // 디버깅용 로그 추가
+            print("📛 파일을 찾을 수 없습니다.")
             self.errorSubject.onNext(.fileNotFound)
             return
         }
@@ -48,11 +48,11 @@ final class DataServiceViewModel {
                 let books = bookResponse.data.map { $0.attributes }
 
                 DispatchQueue.main.async {
-                    self.booksSubject.onNext(books) // 📌 데이터를 BehaviorSubject에 전달
+                    self.booksSubject.onNext(books)
                 }
             } catch {
                 DispatchQueue.main.async {
-                    print("📛 JSON 파싱 실패") // 디버깅용 로그 추가
+                    print("📛 JSON 파싱 실패")
                     self.errorSubject.onNext(.parsingFailed)
                 }
             }

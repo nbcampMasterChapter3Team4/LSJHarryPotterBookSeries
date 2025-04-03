@@ -12,112 +12,105 @@ import RxCocoa
 import Then
 
 class ViewController: UIViewController {
-
+    
+    // MARK: - Properties
     private let viewModel = DataServiceViewModel()
-    // ✅ ViewModel 인스턴스 생성
-    private let disposeBag = DisposeBag() // ✅ Rx 메모리 관리용 DisposeBag
-
+    private let disposeBag = DisposeBag()
+    
     private let bookTitleView = BookTitleView()
     private let bookSeriesView = BookSeriesView()
     private let bookInfoView = BookInfoView()
     private let bookDedicationAndSummaryView = BookDedicationAndSummaryView()
     private let bookChaptersView = BookChaptersView()
-
+    
     private var books: [Attributes] = []
-
+    
     private let scrollView = UIScrollView().then {
-        $0.showsVerticalScrollIndicator = false // ✅ 스크롤 바 숨김
+        $0.showsVerticalScrollIndicator = false
     }
-
-    private let contentView = UIView() // ✅ scrollView 내부 컨텐츠 뷰
-
+    
+    private let contentView = UIView()
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
         setupBindings()
-        viewModel.loadBooks() // ✅ 데이터 로드
+        viewModel.loadBooks()
     }
-}
-
-extension ViewController {
-
+    
+    // MARK: - UI Setup
     private func setupUI() {
-        self.view.addSubview(bookTitleView)
-        self.view.addSubview(bookSeriesView)
-        self.view.addSubview(scrollView)
-
-
+        view.addSubview(bookTitleView)
+        view.addSubview(bookSeriesView)
+        view.addSubview(scrollView)
+        
         scrollView.addSubview(contentView)
         contentView.addSubview(bookInfoView)
         contentView.addSubview(bookDedicationAndSummaryView)
         contentView.addSubview(bookChaptersView)
-
+        
         bookTitleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         bookSeriesView.snp.makeConstraints { make in
             make.top.equalTo(bookTitleView.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
         }
-
+        
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(bookSeriesView.snp.bottom).offset(16)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
-
+        
         contentView.snp.makeConstraints { make in
-            make.top.leading.bottom.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
             make.width.equalTo(scrollView.snp.width)
         }
-
+        
         bookInfoView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(5)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-5)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(5)
         }
-
+        
         bookDedicationAndSummaryView.snp.makeConstraints { make in
             make.top.equalTo(bookInfoView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         bookChaptersView.snp.makeConstraints { make in
             make.top.equalTo(bookDedicationAndSummaryView.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }
     }
-
-}
-
-extension ViewController {
-
+    
+    // MARK: - Bindings
     private func setupBindings() {
+        // books
         viewModel.books
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] books in
-            guard let self = self else { return }
-            self.books = books
+                guard let self = self else { return }
+                self.books = books
                 self.bookSeriesView.configure(books: books, selectedIndex: 0)
-            if let firstBook = books.first {
-                self.updateViewController(with: firstBook, index: 0)
-            }
-        })
+                if let firstBook = books.first {
+                    self.updateViewController(with: firstBook, index: 0)
+                }
+            })
             .disposed(by: disposeBag)
-
+        
+        // buttonTappedHandler
         bookSeriesView.buttonTappedHandler = { [weak self] index in
-            self?.viewModel.bookTappedRelay.accept(index)
+            self?.viewModel.bookIndexTappedRelay.accept(index)
         }
         
-        viewModel.bookTappedRelay
+        // bookIndexTappedRelay
+        viewModel.bookIndexTappedRelay
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] index in
                 guard let self = self else { return }
@@ -129,18 +122,19 @@ extension ViewController {
             })
             .disposed(by: disposeBag)
         
+        // error
         viewModel.error
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] error in
-            print("⚠️ Alert 호출됨: \(error.message)") // 디버깅용 로그 추가
-            self?.showErrorAlert(message: error.message)
-        })
+                print("⚠️ Alert 호출됨: \(error.message)")
+                self?.showErrorAlert(message: error.message)
+            })
             .disposed(by: disposeBag)
-
     }
-
+    
+    // MARK: - Helpers
     private func showErrorAlert(message: String) {
-        print("⚠️ showErrorAlert 실행됨: \(message)") // 디버깅용 로그 추가
+        print("⚠️ showErrorAlert 실행됨: \(message)")
         let alert = UIAlertController(title: "에러 발생", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(action)
@@ -148,7 +142,8 @@ extension ViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
+    
+    // MARK: - UIViews Update
     private func updateViewController(with book: Attributes, index: Int) {
         self.bookTitleView.configure(book: book)
         self.bookSeriesView.configure(for: index)
@@ -157,4 +152,3 @@ extension ViewController {
         self.bookChaptersView.configure(book: book.chapters.map { $0.title })
     }
 }
-

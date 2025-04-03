@@ -8,16 +8,32 @@
 import UIKit
 import SnapKit
 import Then
-import RxSwift
-import RxCocoa
-
 
 final class BookSeriesView: UIView {
 
-    private var buttons: [UIButton] = []
-    private let disposeBag = DisposeBag()
+    // MARK: - EventHandler
     var buttonTappedHandler: ((Int) -> Void)?
 
+    // MARK: - Properties
+    private var buttons: [UIButton] = []
+    private let stackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.alignment = .center
+        $0.distribution = .fill
+    }
+
+    // MARK: - Initialization
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Configuration
     func configure(books: [Attributes], selectedIndex: Int? = nil) {
         makeButtonGroup(for: books)
         if let index = selectedIndex {
@@ -29,24 +45,7 @@ final class BookSeriesView: UIView {
         updateButtonStyles(selectedIndex: index)
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private let stackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.spacing = 8
-        $0.alignment = .center
-        $0.distribution = .fill
-    }
-}
-
-extension BookSeriesView {
+    // MARK: - Setup View
     private func setupView() {
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
@@ -56,9 +55,8 @@ extension BookSeriesView {
             make.trailing.lessThanOrEqualToSuperview().offset(-20)
         }
     }
-}
 
-extension BookSeriesView {
+    // MARK: - UI Components
     private func makeSeriesButton(for indexNum: Int) -> UIButton {
         return UIButton().then {
             $0.setTitle("\(indexNum + 1)", for: .normal)
@@ -74,21 +72,22 @@ extension BookSeriesView {
         }
     }
 
+    private func makeButtonGroup(for books: [Attributes]) {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        buttons.removeAll()
+        books.enumerated().forEach { index, _ in
+            let button = makeSeriesButton(for: index)
+            stackView.addArrangedSubview(button)
+            buttons.append(button)
+        }
+    }
+
+    // MARK: - Button Actions
     @objc private func buttonTapped(_ sender: UIButton) {
         buttonTappedHandler?(sender.tag)
     }
 
-    private func makeButtonGroup(for books: [Attributes]) {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 기존 버튼 제거
-        buttons.removeAll() // 배열 초기화
-
-        books.enumerated().forEach { index, _ in
-            let button = makeSeriesButton(for: index)
-            stackView.addArrangedSubview(button)
-            buttons.append(button) // ✅ 버튼 배열에 저장
-        }
-    }
-
+    // MARK: - Button Style Update
     func updateButtonStyles(selectedIndex: Int) {
         buttons.enumerated().forEach { index, button in
             if index == selectedIndex {

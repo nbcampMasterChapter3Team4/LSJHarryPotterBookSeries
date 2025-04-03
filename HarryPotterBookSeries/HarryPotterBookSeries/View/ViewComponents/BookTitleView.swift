@@ -10,11 +10,16 @@ import SnapKit
 import Then
 
 final class BookTitleView: UIView {
-
-    func configure(book: Attributes) {
-        titleLabel.text = book.title
+    
+    // MARK: - Properties
+    private let titleLabel = UILabel().then {
+        $0.textColor = .label
+        $0.font = .systemFont(ofSize: 24, weight: .bold)
+        $0.numberOfLines = 2
+        $0.textAlignment = .center
     }
 
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -24,20 +29,14 @@ final class BookTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private let titleLabel = UILabel().then {
-        $0.textColor = .label
-        $0.font = .systemFont(ofSize: 24, weight: .bold)
-        $0.numberOfLines = 2
-        $0.textAlignment = .center
+    // MARK: - Configuration
+    func configure(book: Attributes) {
+        titleLabel.text = book.title
     }
-}
-
-
-extension BookTitleView {
     
+    // MARK: - Setup View
     private func setupView() {
         addSubview(titleLabel)
-
         titleLabel.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
